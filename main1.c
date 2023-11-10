@@ -1,3 +1,4 @@
+#include <Servo.h>
 #include <SoftwareSerial.h>
 #define rxPin 11 // Broche 11 en tant que RX, à raccorder sur TX du HC-05
 #define txPin 10 // Broche 10 en tant que TX, à raccorder sur RX du HC-05
@@ -6,14 +7,19 @@ SoftwareSerial mySerial(rxPin, txPin);
 const int TransistorPin = 11;
 const int TMPin = 23;
 
+Servo myservo;
+
 void setup()
 {
     pinMode(rxPin, INPUT);
     pinMode(txPin, OUTPUT);
+
     mySerial.begin(38400);
     Serial.begin(38400);  
     pinMode(TransistorPin, OUTPUT);
     pinMode(TMPin, INPUT);
+
+    myservo.attach(3);
 }
  
 void loop()                     
@@ -45,6 +51,11 @@ void loop()
     if (temp > 29.8) {
         digitalWrite(TransistorPin, 1023);
     }
+
+    myservo.write(0);
+    delay(1000);
+    myservo.write(180);
+    delay(1000);
 }
 
 //void loop() //BLE
