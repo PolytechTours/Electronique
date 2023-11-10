@@ -10,7 +10,23 @@ void setup()
  
 void loop()                     
 {
-    digitalWrite(TransistorPin, 1023); 
+    digitalWrite(TransistorPin, 0); 
+    //decroissance proportionelle de la tension a la temperature
+
+    if {temp > 27} {
+        digitalWrite(TransistorPin, 200);
+    }
+    if {temp > 28} {
+        digitalWrite(TransistorPin, 500);
+    }
+    if {temp > 29} {
+        digitalWrite(TransistorPin, 800);
+    }
+    if {temp > 29.8} {
+        digitalWrite(TransistorPin, 1023);
+    }
+
+
     int TMPValue = analogRead(TMPin);  
  
     float voltage = TMPValue * 5.0;
